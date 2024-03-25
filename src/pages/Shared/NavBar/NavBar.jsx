@@ -1,8 +1,23 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
+  const [theme,setTheme] = useState("light");
+
+  const handleToggle = (e) =>{
+    if (e.target.checked) {
+      setTheme("synthwave")
+    }else{
+      setTheme("light");
+    }
+  }
+
+  useEffect(()=>{
+    localStorage.setItem("theme",theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme",localTheme)
+  },[theme])
   return (
     <div className="sticky top-0 shadow-lg z-50">
       <div className="navbar bg-base-100 max-w-7xl mx-auto px-10 lg:px-2">
@@ -66,7 +81,9 @@ const NavBar = () => {
               </NavLink>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="text-2xl normal-case text-secondary gap-0">
+            Byte<span className="text-primary">Blaze</span>
+          </a>
         </div>
 
         <div className="navbar-end space-x-5">
@@ -112,6 +129,7 @@ const NavBar = () => {
           </div>
           <label className="cursor-pointer grid place-items-center">
             <input
+              onChange={handleToggle}
               type="checkbox"
               value="synthwave"
               className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
@@ -150,8 +168,8 @@ const NavBar = () => {
       </div>
     </div>
   );
-}
+};
 
-NavBar.propTypes = {}
+NavBar.propTypes = {};
 
-export default NavBar
+export default NavBar;
