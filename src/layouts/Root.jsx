@@ -1,21 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import NavBar from '../pages/Shared/NavBar/NavBar';
-import { Outlet } from 'react-router';
-import Footer from '../pages/Shared/Footer/Footer';
+import React from "react";
+import PropTypes from "prop-types";
+import NavBar from "../pages/Shared/NavBar/NavBar";
+import { Outlet } from "react-router";
+import Footer from "../pages/Shared/Footer/Footer";
 
 const Root = () => {
   return (
-    <div>
-      <div className='sticky top-0 z-50'>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
         <NavBar />
+        <div className="max-w-7xl mx-auto px-10 lg:px-2 mt-10">
+          <Outlet />
+        </div>
       </div>
-      <Outlet />
       <Footer />
     </div>
   );
-}
+};
 
-Root.propTypes = {}
+Root.propTypes = {};
 
-export default Root
+export default Root;
